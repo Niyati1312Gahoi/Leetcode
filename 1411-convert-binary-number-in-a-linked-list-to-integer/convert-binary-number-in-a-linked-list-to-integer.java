@@ -11,26 +11,27 @@
 class Solution {
     public int getDecimalValue(ListNode head) {
         ListNode temp=head;
-        int n=0;
+        ListNode start=reverse(temp);
         int s=0;
-        while(temp!=null){
-            temp=temp.next;
-            n++;
-        }
-       int arr[]=new int[n];
-       for(int i=0;i<n;i++){
-        arr[i]=head.val;
-        head=head.next;
-       }
         int d=0;
-       for(int i=arr.length-1;i>=0;i--){
-
-       int x=(int)Math.pow(2,d);
-        s=s+arr[i]*x;
-        d++;
-        
-       }
-       return s;
-        
+        while(start!=null){
+            int u=(int)Math.pow(2,d);
+           s=s+start.val*u;
+           start=start.next;
+           d++;
+        }
+        return s;
+       
+    }
+    public ListNode reverse(ListNode head){
+        ListNode curr=head;
+        ListNode prev=null;
+        while(curr!=null){
+            ListNode ahead=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=ahead;
+        }
+        return prev;
     }
 }
