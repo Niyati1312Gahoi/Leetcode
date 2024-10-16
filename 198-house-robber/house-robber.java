@@ -1,26 +1,19 @@
 class Solution {
     public int rob(int[] nums) {
-        int[] dp=new int[nums.length];
+        int[] dp=new int[nums.length+1];
         Arrays.fill(dp,-1);
-        return maxmoney(nums,nums.length-1,dp);
-
-
+        return robber(nums,0,dp);
         
     }
-     public static int maxmoney(int[] house,int index,int[] dp){
-
-
-        if(index < 0){
+    public int robber(int[] nums,int i,int[] dp){
+        if(i>=nums.length){
             return 0;
         }
-        if(dp[index]!=-1){
-            return dp[index];
+        if(dp[i]!=-1){
+            return dp[i];
         }
-        int choose=house[index]+maxmoney(house,index-2,dp);
-        int not_choose=maxmoney(house,index-1,dp);
-
-        return dp[index]=Math.max(choose,not_choose);
-
+        int rob=nums[i]+robber(nums,i+2,dp);
+        int notrob=robber(nums,i+1,dp);
+        return dp[i]=Math.max(rob,notrob);
     }
-
 }
