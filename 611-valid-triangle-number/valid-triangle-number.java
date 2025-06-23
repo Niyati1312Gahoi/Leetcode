@@ -3,14 +3,20 @@ class Solution {
         Arrays.sort(nums);
         int c=0;
         for(int i=0;i<nums.length-2;i++){
+            if(nums[i]==0)continue;
             for(int j=i+1;j<nums.length-1;j++){
-                for(int k=j+1;k<nums.length;k++){
-                    if((nums[i]+nums[j]>nums[k])){
-                        c++;
+                int s=nums[i]+nums[j],k=j;
+                int l=j+1,h=nums.length-1;
+                while(l<=h){
+                    int mid=(l+h)/2;
+                    if(nums[mid]<s){
+                        k=mid;
+                        l=mid+1;
                     }else{
-                        break;
+                        h=mid-1;
                     }
                 }
+                c+=k-j;
             }
         }
         return c;
